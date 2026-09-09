@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "API Test Automation with BDD + Allure | AI Generated Code (100% AI)",
   "type": "module",
+  "engines": {
+    "node": "22 || 24 || >=26"
+  },
   "scripts": {
     "test": "npm run test:cucumber && npm run report:generate",
     "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require 'tests/support/*.ts' --format json:tests/report/cucumber-report.json --format allure-cucumberjs/reporter --format progress",

@@ -24,6 +24,12 @@ Then('the response should contain paginated data', function () {
     expect(testResponse.data).to.have.property('total');
 });
 
+Then('the response should contain user data for ID ' + '{string}', function (userId: string) {
+    expect(testResponse.data).to.have.property('data');
+    expect(testResponse.data.data).to.include({ id: Number(userId) });
+    expect(testResponse.data.data).to.include.all.keys('email', 'first_name', 'last_name');
+});
+
 Then('the response should be of type ' + '{string}', function (type: string) {
     expect(testResponse.data).to.be.a(type);
 });

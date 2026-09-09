@@ -24,6 +24,7 @@
     "@cucumber/cucumber": "^13.2.1",
     "@cucumber/messages": "^34.2.1",
     "@faker-js/faker": "^10.6.0",
+    "@types/chai": "^5.2.3",
     "@types/node": "^24.10.1",
     "allure-commandline": "^2.32.0",
     "allure-cucumberjs": "^3.12.0",

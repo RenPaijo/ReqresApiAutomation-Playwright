@@ -9,7 +9,7 @@ Feature: Get Single User by ID
         Given I have a valid users endpoint
         When I make a GET request to users by ID "2"
         Then the response status should be 200
-        And the response should contain paginated data
+        And the response should contain user data for ID "2"
 
     Scenario: Verify get non-existent user returns error
         Given I have a valid users endpoint

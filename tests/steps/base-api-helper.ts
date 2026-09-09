@@ -1,5 +1,6 @@
-import { expect } from 'chai';
 import { faker } from '@faker-js/faker';
+
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export function generateUserData() {
     return {
@@ -18,12 +19,11 @@ export function generatePatchData() {
     };
 }
 
-export async function sendAPIRequest(method, endpoint, data) {
-    data = data || null;
+export async function sendAPIRequest(method: HttpMethod, endpoint: string, data?: unknown) {
     const baseUrl = process.env.API_BASE_URL || 'https://reqres.in/api';
     const url = baseUrl + endpoint;
-    const config = {
-        method: method,
+    const config: RequestInit = {
+        method,
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -49,7 +49,7 @@ export async function sendAPIRequest(method, endpoint, data) {
             data: jsonData
         };
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error:', error instanceof Error ? error.message : String(error));
         throw error;
     }
 }

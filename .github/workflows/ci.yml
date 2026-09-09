@@ -23,12 +23,13 @@ jobs:
       with:
         node-version: '${{ matrix.node-version }}'
         cache: 'npm'
+        cache-dependency-path: package-lock.json
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     - name: Run Cucumber tests with Allure
-      run: npx @cucumber/cucumber tests/features/**/*.feature --require tests/support/index.ts --format json:tests/report/cucumber-report.json --format progress --format "allure-tape:test-results"
+      run: npm test
 
     - name: Archive test artifacts
       uses: actions/upload-artifact@v4
@@ -37,6 +38,7 @@ jobs:
         name: cucumber-report-${{ matrix.node-version }}
         path: |
           tests/report/cucumber-report.json
+          tests/report/html-report
           allure-results
-          allure-results/allure-report
+          allure-report
         retention-days: 30

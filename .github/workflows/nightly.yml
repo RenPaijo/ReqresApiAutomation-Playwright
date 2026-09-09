@@ -1,0 +1,47 @@
+name: Nightly API Tests
+
+on:
+  schedule:
+    # Runs at 2 AM UTC every day
+    - cron: '0 2 * * *'
+  
+  workflow_dispatch:  # Allows manual trigger
+  
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci && npm install -g @cucumber/cucumber
+
+    - name: Run Cucumber tests
+      run: |
+        npx @cucumber/cucumber tests/features/**/*.feature \
+          --require tests/support/index.cjs \
+          --format json:tests/report/cucumber-report.json \
+          --format progress
+
+    - name: Archive test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: cucumber-report-${{ github.run_id }}
+        path: |
+          tests/report/cucumber-report.json
+        retention-days: 14
+        
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "Nightly tests failed! Check the pipeline output."
+        exit 1

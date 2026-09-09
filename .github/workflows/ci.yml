@@ -1,0 +1,43 @@
+name: CI - API Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: '${{ matrix.node-version }}'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci && npm install -g @cucumber/cucumber
+
+    - name: Run Cucumber tests
+      run: |
+        npx @cucumber/cucumber tests/features/**/*.feature \
+          --require tests/support/index.cjs \
+          --format json:tests/report/cucumber-report.json \
+          --format progress
+
+    - name: Archive test artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: cucumber-report-${{ matrix.node-version }}
+        path: tests/report/cucumber-report.json
+        retention-days: 30

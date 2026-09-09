@@ -5,18 +5,21 @@
   "type": "module",
   "scripts": {
     "test": "npm run test:cucumber && npm run report:generate",
-    "test:cucumber": "NODE_OPTIONS='--experimental-strip-types' npx ts-node --esm tests/features/**/*.feature --require-directory tests/support --format json:tests/report/cucumber-report.json --format progress",
+    "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require-directory tests/support --format json:tests/report/cucumber-report.json --format progress",
     "test:specific": "npx @cucumber/cucumber tests/features/GET_USERS.feature --require-directory tests/support --format progress",
     "report:generate": "node scripts/generate-reports.js",
     "clean": "Remove-Item -Recurse -Force tests\\report\\* -ErrorAction SilentlyContinue",
     "setup": "npm install"
   },
-  "keywords": ["api-testing", "bdd", "cucumber"],
+  "keywords": [
+    "api-testing",
+    "bdd",
+    "cucumber"
+  ],
   "author": "AI Generated",
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^13.2.1",
-    "@cucumber/tsconfig": "^4.0.0",
     "@faker-js/faker": "^10.6.0",
     "@types/node": "^24.10.1",
     "chai": "^6.2.2",

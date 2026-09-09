@@ -27,13 +27,16 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Cucumber tests
-      run: npx @cucumber/cucumber tests/features/**/*.feature --require tests/support/index.ts --format json:tests/report/cucumber-report.json --format progress
+    - name: Run Cucumber tests with Allure
+      run: npx @cucumber/cucumber tests/features/**/*.feature --require tests/support/index.ts --format json:tests/report/cucumber-report.json --format progress --format "allure-tape:test-results"
 
     - name: Archive test artifacts
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: cucumber-report-${{ matrix.node-version }}
-        path: tests/report/cucumber-report.json
+        path: |
+          tests/report/cucumber-report.json
+          allure-results
+          allure-results/allure-report
         retention-days: 30

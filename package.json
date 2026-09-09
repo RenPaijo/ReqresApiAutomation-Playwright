@@ -8,7 +8,9 @@
     "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require-directory tests/support --format json:tests/report/cucumber-report.json --format progress",
     "test:specific": "npx @cucumber/cucumber tests/features/GET_USERS.feature --require-directory tests/support --format progress",
     "report:generate": "node scripts/generate-reports.js",
-    "clean": "Remove-Item -Recurse -Force tests\\report\\* -ErrorAction SilentlyContinue",
+    "report:html": "allure generate allure-results --clean --project ./report/allure-report && npx serve -s report/allure-report -l 4000",
+    "allure:open": "allure open --port 4000 allure-results",
+    "clean": "Remove-Item -Recurse -Force tests\\report\\* -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force allure-results\\* -ErrorAction SilentlyContinue",
     "setup": "npm install"
   },
   "keywords": [
@@ -20,9 +22,13 @@
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^13.2.1",
+    "@cucumber/messages": "^34.2.1",
     "@faker-js/faker": "^10.6.0",
     "@types/node": "^24.10.1",
+    "allure-commandline": "^2.32.0",
     "chai": "^6.2.2",
+    "cucumber-html-reporter": "^7.2.0",
+    "serve": "^14.2.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

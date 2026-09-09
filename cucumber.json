@@ -1,0 +1,14 @@
+{
+  "default": {
+    "formatOptions": {
+      "print": {
+        "colors": true
+      }
+    },
+    "publishQuiet": true,
+    "require": ["tests/support/index.ts"],
+    "requireModule": [
+      "ts-node/register/esm"
+    ]
+  }
+}

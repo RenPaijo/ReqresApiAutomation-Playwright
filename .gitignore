@@ -7,6 +7,10 @@ yarn.lock
 tests/report/*
 !/tests/report/.gitkeep
 
+# Allure Reports
+allure-results/
+allure-report/
+
 # Environment files
 .env.local
 *.env

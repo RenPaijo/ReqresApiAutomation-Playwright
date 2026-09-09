@@ -1,7 +1,5 @@
-import chai from 'chai';
+import { expect } from 'chai';
 import { faker } from '@faker-js/faker';
-
-export const expect = chai.expect;
 
 export function generateUserData() {
     return {

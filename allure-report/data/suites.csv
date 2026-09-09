@@ -1,0 +1,31 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"As a test engineer
+    I want to test GET users list functionality
+    So that I can verify the API returns paginated user data","243","Validate users list contains valid user data","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test GET single user functionality
+    So that I can verify the API returns individual user data","433","Verify get non-existent user returns error","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user deletion functionality
+    So that I can verify users can be removed via API","656","Delete user with valid ID","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user update functionality
+    So that I can verify existing users can be updated via API","433","Update user with valid patch data","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test GET single user functionality
+    So that I can verify the API returns individual user data","71","Verify get valid user by ID","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user deletion functionality
+    So that I can verify users can be removed via API","420","Delete non-existent user returns appropriate response","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test GET users list functionality
+    So that I can verify the API returns paginated user data","426","Verify GET users list response structure","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user update functionality
+    So that I can verify existing users can be updated via API","449","Verify user update contains timestamp","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user creation functionality
+    So that I can verify new users can be created via API","252","Verify user creation contains required fields","","2026-09-09","failed","2026-09-09","","","",""
+"As a test engineer
+    I want to test user creation functionality
+    So that I can verify new users can be created via API","278","Create user with valid random data","","2026-09-09","failed","2026-09-09","","","",""

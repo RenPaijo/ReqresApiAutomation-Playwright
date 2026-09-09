@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import * as helper from './base-api-helper.ts';
 let testResponse: any = null;
 

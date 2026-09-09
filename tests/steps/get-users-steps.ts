@@ -1,7 +1,7 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import * as helper from './base-api-helper.ts';
-let testResponse = null;
+let testResponse: any = null;
 
 Given('I have a valid users endpoint', async function () {
     console.log('[READY] Endpoint ready for users API');

@@ -27,11 +27,7 @@ jobs:
       run: npm install
 
     - name: Run Cucumber tests
-      run: |
-        npx @cucumber/cucumber tests/features/**/*.feature \
-          --require tests/support/index.cjs \
-          --format json:tests/report/cucumber-report.json \
-          --format progress
+      run: npx @cucumber/cucumber tests/features/**/*.feature --require tests/support/index.ts --format json:tests/report/cucumber-report.json --format progress
 
     - name: Archive test artifacts
       uses: actions/upload-artifact@v4

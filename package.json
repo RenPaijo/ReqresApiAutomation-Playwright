@@ -2,10 +2,11 @@
   "name": "api-test-automation",
   "version": "1.0.0",
   "description": "API Test Automation with BDD + Allure | AI Generated Code (100% AI)",
+  "type": "module",
   "scripts": {
     "test": "npm run test:cucumber && npm run report:generate",
-    "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require tests/support/index.cjs --format json:tests/report/cucumber-report.json --format progress",
-    "test:specific": "npx @cucumber/cucumber tests/features/GET_USERS.feature --require tests/support/index.cjs --format progress",
+    "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require-directory tests/support --format json:tests/report/cucumber-report.json --format progress",
+    "test:specific": "npx @cucumber/cucumber tests/features/GET_USERS.feature --require-directory tests/support --format progress",
     "report:generate": "node scripts/generate-reports.js",
     "clean": "Remove-Item -Recurse -Force tests\\report\\* -ErrorAction SilentlyContinue",
     "setup": "npm install"
@@ -16,6 +17,9 @@
   "devDependencies": {
     "@cucumber/cucumber": "^13.2.1",
     "@faker-js/faker": "^10.6.0",
-    "chai": "^6.2.2"
+    "@types/node": "^24.10.1",
+    "chai": "^6.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

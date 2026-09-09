@@ -1,7 +1,11 @@
 // Automated Report Generator
-const fs = require('fs');
-const { execSync } = require('child_process');
-const path = require('path');
+import { readFileSync, existsSync } from 'fs';
+import { execSync } from 'child_process';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 console.log('\n===============================');
 console.log('?? Generating Test Reports');
@@ -11,12 +15,12 @@ try {
     // Check test results
     const testReportPath = 'tests/report/cucumber-report.json';
     
-    if (!fs.existsSync(testReportPath)) {
+    if (!existsSync(testReportPath)) {
         console.error('? No test report found! Run tests first.');
         process.exit(1);
     }
     
-    const report = JSON.parse(fs.readFileSync(testReportPath, 'utf8'));
+    const report = JSON.parse(readFileSync(testReportPath, 'utf8'));
     
     console.log('?? Test Summary:');
     console.log(`   Total Scenarios: ${report.run.summary.scenarioCount}`);

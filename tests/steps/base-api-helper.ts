@@ -1,8 +1,9 @@
-﻿const chai = require('chai');
-const { faker } = require('@faker-js/faker');
-module.exports.expect = chai.expect;
+import chai from 'chai';
+import { faker } from '@faker-js/faker';
 
-function generateUserData() {
+export const expect = chai.expect;
+
+export function generateUserData() {
     return {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
@@ -12,14 +13,14 @@ function generateUserData() {
     };
 }
 
-function generatePatchData() {
+export function generatePatchData() {
     return {
         name: 'Updated ' + faker.person.firstName(),
         job: faker.person.jobTitle()
     };
 }
 
-async function sendAPIRequest(method, endpoint, data) {
+export async function sendAPIRequest(method, endpoint, data) {
     data = data || null;
     const baseUrl = process.env.API_BASE_URL || 'https://reqres.in/api';
     const url = baseUrl + endpoint;
@@ -33,7 +34,7 @@ async function sendAPIRequest(method, endpoint, data) {
     if (data) {
         config.body = JSON.stringify(data);
     }
-    console.log('[INFO] ' + method + ' ' + url);
+    console.log(`[INFO] ${method} ${url}`);
     try {
         const response = await fetch(url, config);
         const contentType = response.headers.get('content-type') || '';
@@ -43,7 +44,7 @@ async function sendAPIRequest(method, endpoint, data) {
         } else {
             jsonData = await response.text();
         }
-        console.log('Status: ' + response.status);
+        console.log(`Status: ${response.status}`);
         return {
             status: response.status,
             statusText: response.statusText,
@@ -54,10 +55,3 @@ async function sendAPIRequest(method, endpoint, data) {
         throw error;
     }
 }
-
-module.exports = {
-    ...module.exports,
-    sendAPIRequest: sendAPIRequest,
-    generateUserData: generateUserData,
-    generatePatchData: generatePatchData
-};

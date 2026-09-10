@@ -1,19 +1,19 @@
 {
   "name": "api-test-automation",
   "version": "1.0.0",
-  "description": "API Test Automation with BDD + Allure | AI Generated Code (100% AI)",
+  "description": "API test automation with Cucumber BDD and HTML reports",
   "type": "module",
   "engines": {
     "node": "22 || 24 || >=26"
   },
   "scripts": {
     "test": "npm run test:cucumber && npm run report:generate",
-    "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require 'tests/support/*.ts' --format json:tests/report/cucumber-report.json --format allure-cucumberjs/reporter --format progress",
-    "test:specific": "npx @cucumber/cucumber tests/features/GET_USERS.feature --require 'tests/support/*.ts' --format progress",
+    "typecheck": "tsc --noEmit",
+    "test:cucumber": "npx @cucumber/cucumber tests/features/**/*.feature --require 'tests/support/*.ts' --format json:tests/report/cucumber-report.json --format progress",
+    "test:specific": "npx @cucumber/cucumber tests/features/get_users.feature --require 'tests/support/*.ts' --format progress",
     "report:generate": "node scripts/generate-reports.js",
-    "report:html": "allure generate allure-results --clean --project ./allure-results && npx serve -s allure-results/allure-report -l 4000",
-    "allure:open": "allure open --port 4000 allure-results",
-    "clean": "Remove-Item -Recurse -Force tests\\report\\* -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force allure-results\\* -ErrorAction SilentlyContinue",
+    "report:html": "npx serve -s tests/report/html-report -l 4000",
+    "clean": "node -e \"const fs=require('node:fs'); for(const path of ['tests/report/cucumber-report.json','tests/report/html-report']) fs.rmSync(path,{recursive:true,force:true})\"",
     "setup": "npm install"
   },
   "keywords": [
@@ -29,8 +29,6 @@
     "@faker-js/faker": "^10.6.0",
     "@types/chai": "^5.2.3",
     "@types/node": "^24.10.1",
-    "allure-commandline": "^2.32.0",
-    "allure-cucumberjs": "^3.12.0",
     "chai": "^5.3.3",
     "serve": "^14.2.0",
     "ts-node": "^10.9.2",

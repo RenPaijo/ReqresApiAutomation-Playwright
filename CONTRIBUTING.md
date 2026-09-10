@@ -37,13 +37,13 @@ Feature: Your Feature Name
 
 ### 2. Create Step Definition
 
-Create a new `.cjs` file in `tests/steps/`:
+Create a new `.ts` file in `tests/steps/`:
 
 ```javascript
 const { Given, When, Then } = require('@cucumber/cucumber');
 const chai = require('chai');
 const { expect } = chai;
-const helper = require('./base-api-helper.cjs');
+import * as helper from './base-api-helper.ts';
 
 let testResponse = null;
 
@@ -63,7 +63,7 @@ Then('expect result', function () {
 ### 3. Run Your Tests
 
 ```bash
-npx @cucumber/cucumber tests/features/your-feature.feature --require tests/support/index.cjs --format progress
+npx @cucumber/cucumber tests/features/your-feature.feature --require tests/support/index.ts --format progress
 ```
 
 ---
@@ -76,7 +76,7 @@ npx @cucumber/cucumber tests/features/your-feature.feature --require tests/suppo
 - Maintain minimum 2 scenarios per endpoint
 
 ### Step Definitions
-- Modify existing `.cjs` files in `tests/steps/`
+- Modify existing `.ts` files in `tests/steps/`
 - Use Faker for random data generation
 - Keep step functions modular and reusable
 
@@ -91,7 +91,7 @@ npm run test
 
 ### Specific Endpoint
 ```bash
-npx @cucumber/cucumber tests/features/your-feature.feature --require tests/support/index.cjs --format progress
+npx @cucumber/cucumber tests/features/your-feature.feature --require tests/support/index.ts --format progress
 ```
 
 ### View Reports

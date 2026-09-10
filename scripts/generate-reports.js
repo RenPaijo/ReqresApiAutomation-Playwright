@@ -1,11 +1,5 @@
 // Automated Report Generator
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
-import { execSync } from 'child_process';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 console.log('\n===============================');
 console.log('?? Generating Test Reports');
@@ -29,9 +23,12 @@ try {
             if (element.type === 'background') continue;
             scenarioCount++;
             
-            const hasFailed = element.steps?.some(s => s.result?.status === 'failed');
+            const statuses = element.steps?.map(step => step.result?.status) ?? [];
+            const hasFailed = statuses.includes('failed');
             if (hasFailed) {
                 failedCount++;
+            } else if (statuses.some(status => status !== 'passed')) {
+                skippedCount++;
             } else {
                 passedCount++;
             }
@@ -53,35 +50,10 @@ try {
     // Generate HTML report
     generateHtmlReport(report, { scenarioCount, passedCount, failedCount, skippedCount });
     
-    // Generate Allure report
-    console.log('\n===============================');
-    console.log('?? Generating Allure Report');
-    console.log('===============================\n');
-    
-    try {
-        if (existsSync('allure-results')) {
-            execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
-            console.log('\n? Allure Report Generated: allure-report/index.html\n');
-            console.log('   To view: npx allure serve allure-results --port 4000\n');
-            
-            // Try to open in browser
-            setTimeout(() => {
-                try {
-                    execSync('start allure-report\\index.html', { stdio: 'ignore' });
-                } catch (e) {
-                    // Ignore browser open errors
-                }
-            }, 1500);
-        } else {
-            console.warn('? No allure-results folder found.\n');
-        }
-    } catch (error) {
-        console.error('? Error generating allure report:', error.message);
-    }
-    
 } catch (error) {
     console.error('? Error:', error.message);
     console.error(error.stack);
+    process.exitCode = 1;
 }
 
 function generateHtmlReport(data, summary) {

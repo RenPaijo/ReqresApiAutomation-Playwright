@@ -80,7 +80,7 @@ GitHub Actions **automatically activates** when you have workflow files in `.git
 |---------|-------------|
 | `npm run test` | Run all tests and generate reports |
 | `npm run clean` | Clean all generated reports |
-| `npm run lint` | Check code style (if ESLint configured) |
+| `npm run typecheck` | Validate TypeScript types |
 
 ---
 

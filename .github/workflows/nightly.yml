@@ -25,6 +25,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Check TypeScript
+      run: npm run typecheck
+
     - name: Run Cucumber tests
       run: npm test
 
@@ -36,8 +39,6 @@ jobs:
         path: |
           tests/report/cucumber-report.json
           tests/report/html-report
-          allure-results
-          allure-report
         retention-days: 14
         
     - name: Notify on failure

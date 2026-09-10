@@ -1,13 +1,12 @@
-import { Before, After } from '@cucumber/cucumber';
+import { After, Before, setDefaultTimeout, Status } from '@cucumber/cucumber';
+
+setDefaultTimeout(15_000);
 
 Before(function () {
     console.log('\n===============================\n');
 });
 
 After(function ({ result }) {
-    if (result) {
-        console.log('? Scenario Failed\n');
-    } else {
-        console.log('? Scenario Passed Successfully\n');
-    }
+    const status = result?.status ?? Status.UNKNOWN;
+    console.log(`[${status.toUpperCase()}] Scenario finished\n`);
 });
